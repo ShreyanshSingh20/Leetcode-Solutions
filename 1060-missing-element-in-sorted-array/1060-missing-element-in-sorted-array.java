@@ -1,15 +1,10 @@
 class Solution {
-    public int missingElement(int[] arr, int k) {
-        int n=arr.length;
-        int curr=arr[0];
-        for(int i=1;i<n;i++){
-            int diff=arr[i]-arr[i-1]-1;
-            if(diff<k) k-=diff;
-            else return curr+k;
-            
-            curr=arr[i];
+    public int missingElement(int[] nums, int k) {
+        for(int i = 0; i < nums.length - 1; i++){
+            if(nums[i + 1] - nums[i] - 1 >= k)
+                return nums[i] + k;
+            k = k - (nums[i + 1] - nums[i] - 1);
         }
-        
-        return curr+k;
+        return nums[nums.length - 1] + k;
     }
 }
