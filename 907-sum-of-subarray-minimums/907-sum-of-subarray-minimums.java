@@ -24,10 +24,10 @@ class Solution {
 			b.push(i);
 		}
         
-        for(int x:left) System.out.print(x+" ");
-        System.out.println();
-        for(int x:right) System.out.print(x+" ");
-        System.out.println();
+        // for(int x:left) System.out.print(x+" ");
+        // System.out.println();
+        // for(int x:right) System.out.print(x+" ");
+        // System.out.println();
 
 		long res = 0;
 		for (int i = 0; i < n; i++) {
