@@ -9,7 +9,7 @@ class Solution {
 		Stack<Integer> a = new Stack<>();
 		for (int i = 0; i < n; i++) {
 			while (!a.isEmpty() && arr[a.peek()] >= arr[i]) {
-				left[i] = a.pop();
+				a.pop();
 			}
 			left[i]=a.isEmpty()?i+1:i-a.peek();
 			a.push(i);
@@ -18,16 +18,16 @@ class Solution {
 		Stack<Integer> b = new Stack<>();
 		for (int i = n - 1; i >= 0; i--) {
 			while (!b.isEmpty() && arr[b.peek()] > arr[i]) {
-				right[i] = b.pop();
+				b.pop();
 			}
 			right[i]=b.isEmpty()?n-i:b.peek()-i;
 			b.push(i);
 		}
         
-        // for(int x:left) System.out.print(x+" ");
-        // System.out.println();
-        // for(int x:right) System.out.print(x+" ");
-        // System.out.println();
+        for(int x:left) System.out.print(x+" ");
+        System.out.println();
+        for(int x:right) System.out.print(x+" ");
+        System.out.println();
 
 		long res = 0;
 		for (int i = 0; i < n; i++) {
