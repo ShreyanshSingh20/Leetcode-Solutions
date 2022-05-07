@@ -4,7 +4,7 @@ class Solution {
 		TreeMap<Integer,Integer> left=new TreeMap<>();
 		TreeMap<Integer,Integer> right=new TreeMap<>();
 		
-		left.put(arr[0], 1);
+		int min=arr[0];
 		for(int i=n-1;i>0;i--)
            right.put(arr[i], right.getOrDefault(arr[i], 0)+1);
 		
@@ -13,22 +13,21 @@ class Solution {
 			if(freq==1) right.remove(arr[i]);
 			else right.put(arr[i], freq-1);
 			
-			Integer isLessLeft=left.lowerKey(arr[i]);
+			Integer isLessLeft=(min<arr[i])?min:null;
 			if(isLessLeft==null){ 
-                left.put(arr[i], left.getOrDefault(arr[i], 0)+1);
+                min=Math.min(min,arr[i]);
                 continue;
             }
-			int leftVal=left.firstKey();
-			
+
 			Integer isLessRight=right.lowerKey(arr[i]);
 			if(isLessRight==null) {
-                left.put(arr[i], left.getOrDefault(arr[i], 0)+1);
+                min=Math.min(min,arr[i]);
                 continue;
             }
 			
-			if(isLessRight>leftVal) return true;
+			if(isLessRight>isLessLeft) return true;
 			
-			left.put(arr[i], left.getOrDefault(arr[i], 0)+1);
+			min=Math.min(min,arr[i]);
 		}
         
         return false;
