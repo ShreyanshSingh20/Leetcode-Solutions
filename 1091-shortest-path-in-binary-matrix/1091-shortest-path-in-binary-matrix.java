@@ -4,8 +4,7 @@ class Solution {
         int n=mat.length;
         Queue<int[]> queue=new ArrayDeque<>();
         queue.add(new int[]{0,0,1});
-        boolean vis[][]=new boolean[n][n];
-        vis[0][0]=true;
+        mat[0][0]=1;
         while(!queue.isEmpty()){
             int size=queue.size();
             for(int i=0;i<size;i++){
@@ -15,9 +14,9 @@ class Solution {
                 for(int j=0;j<offset.length;j++){
                     int newx=x+offset[j][0];
                     int newy=y+offset[j][1];
-                    if(newx<0||newy<0||newx>=n||newy>=n||mat[newx][newy]==1||vis[newx][newy]) continue;
+                    if(newx<0||newy<0||newx>=n||newy>=n||mat[newx][newy]==1) continue;
                     queue.add(new int[]{newx,newy,dist+1});
-                    vis[newx][newy]=true;
+                    mat[newx][newy]=1;
                 }
             }
         }
