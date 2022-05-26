@@ -3,8 +3,9 @@ public class Solution {
     public int hammingWeight(int n) {
         // return Integer.bitCount(n);
         int res=0;
-        for(int i=31;i>=0;i--){
-            if(setBit(n,i)) res++;
+        while(n!=0){
+            res++;
+            n=n&(n-1);
         }
         return res;
     }
