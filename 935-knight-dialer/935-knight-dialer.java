@@ -2,16 +2,15 @@ class Solution {
     public long mod = 1_000_000_007;
     public int knightDialer(int n) {
         long res=0;
+        long dp[][][]=new long[5][4][5001];
+		for(long x[][]:dp) {
+			for(long y[]:x) {
+				Arrays.fill(y, -1);
+			}
+		}
 		for(int i=0;i<4;i++) {
 			for(int j=0;j<3;j++) {
 				if((i==3&&j==0)||(i==3&&j==2)) continue;
-				long dp[][][]=new long[5][4][5001];
-				for(long x[][]:dp) {
-					for(long y[]:x) {
-						Arrays.fill(y, -1);
-					}
-				}
-
 				res=add(res, solver(i, j, n, 4, 3, dp));
 			}
 		}
