@@ -2,20 +2,12 @@ class Solution {
     public int[][] transpose(int[][] mat) {
         int r=mat.length;
         int c=mat[0].length;
-        
-        int newRow=c;
-        int newCol=r;
-        int res[][]=new int[newRow][newCol];
-        int ptx=0;int pty=0;
-        for(int i=0;i<c;i++){
-            pty=0;
-            for(int j=0;j<r;j++){
-                res[ptx][pty]=mat[j][i];
-                pty++;
+        int res[][]=new int[c][r];
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+                res[j][i]=mat[i][j];
             }
-            ptx++;
         }
-        
         return res;
     }
 }
