@@ -25,7 +25,7 @@ class Solution {
             pt=(pt+1)%a.length;
         }
         
-        for(int x:a) System.out.print(x+" ");
+        // for(int x:a) System.out.print(x+" ");
         
         int ind=-1;
         for(int i=1;i<a.length;i++){
