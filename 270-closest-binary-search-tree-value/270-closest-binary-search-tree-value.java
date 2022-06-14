@@ -15,21 +15,27 @@
  */
 class Solution {
     public int closestValue(TreeNode root, double target) {
-        solver(root,target);
-        return res.val;
+        return solver(root,target);
     }
     
     double diff=Double.MAX_VALUE;
-    TreeNode res=null;
-    public void solver(TreeNode root,double target){
-        if(root==null) return;
-        solver(root.left,target);
-        double val=root.val;
-        double currDiff=Math.abs(target-val);
-        if(currDiff<diff){
-            diff=currDiff;
-            res=root;
+    public int solver(TreeNode root,double target){
+        TreeNode res=null;
+        while(root!=null){
+            double val=root.val;
+            double currDiff=Math.abs(target-val);
+            if(currDiff<diff){
+                diff=currDiff;
+                res=root;
+            }
+            
+            if(val==target) return root.val;
+            
+            if(target<val) root=root.left;
+            else if(target>val) root=root.right;
         }
-        solver(root.right,target);
+        
+        return res.val;
+        
     }
 }
