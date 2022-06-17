@@ -30,12 +30,12 @@ class Solution {
         int left=dfs(root.left);
         int right=dfs(root.right);
         
-        if(left==0||right==0){
+        if(left==0||right==0){//if the left or right node is leaf then the current node needs to be covered by the camera
             cameras++;
             return 1;
         }
         
-        if(left==1||right==1) return 2;
+        if(left==1||right==1) return 2;//if the left or right node is already covered then there's no need to cover this node
         else return 0;
     }
 }
