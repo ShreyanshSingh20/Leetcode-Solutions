@@ -15,20 +15,27 @@
  */
 class Solution {
     public int minCameraCover(TreeNode root) {
-        int ans[]=solver(root);
-        return Math.min(ans[1],ans[2]);
+        return ((dfs(root)==0)?1:0)+cameras;
     }
     
-    public int[] solver(TreeNode root){
-        if(root==null) return new int[]{0,0,99999};
+    public int cameras=0;
+    
+    //if the node is leaf-no need to cover->0
+    //if the node is parent of the leaf-need to cover-1
+    //if the node's child is the parent of a leaf-already covered-2
+    public int dfs(TreeNode root){
         
-        int left[]=solver(root.left);
-        int right[]=solver(root.right);
+        if(root==null) return 2;
         
-        int a=left[1]+right[1];
-        int b=Math.min(left[2]+Math.min(right[1],right[2]),right[2]+Math.min(left[1],left[2]));
-        int c=1+Math.min(left[0],Math.min(left[1],left[2]))+Math.min(right[0],Math.min(right[1],right[2]));
+        int left=dfs(root.left);
+        int right=dfs(root.right);
         
-        return new int[]{a,b,c};
+        if(left==0||right==0){
+            cameras++;
+            return 1;
+        }
+        
+        if(left==1||right==1) return 2;
+        else return 0;
     }
 }
