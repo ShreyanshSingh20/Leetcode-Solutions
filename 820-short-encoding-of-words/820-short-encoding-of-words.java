@@ -28,7 +28,7 @@ class Solution {
 				res.append(bfsSolver(list, vis, i));
 			}
 		}
-		System.out.println(res.toString());
+		// System.out.println(res.toString());
 		return res.length();
 	}
 
