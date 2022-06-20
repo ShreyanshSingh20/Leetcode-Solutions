@@ -6,5 +6,5 @@ where (student_id,grade) in
 (select student_id,max(grade)
 from Enrollments
 group by student_id)
-group by student_id,grade
+group by student_id
 order by student_id;
