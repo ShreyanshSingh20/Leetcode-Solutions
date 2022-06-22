@@ -1,32 +1,43 @@
 class Solution {
-    public int findKthLargest(int[] nums, int k) {
-        int pos[]=new int[10005];
-        int neg[]=new int[10005];
+    public int findKthLargest(int[] arr, int k) {
+        int n=arr.length;
+        int left=0;
+        int right=n-1;
         
-        int n=nums.length;
-        for(int i=0;i<n;i++){
-            if(nums[i]>=0) pos[nums[i]]++;
-            else neg[Math.abs(nums[i])]++;
-        }
+        Random rand=new Random();
         
-        
-        //traverse the pos freq array from the starting index
-        for(int i=pos.length-1;i>=0;i--){
-            if(k==0) return i;
-            int minus=Math.min(k,pos[i]);
-            k-=minus;
-            if(k==0) return i;
-        }
-        
-        
-        //traverse the neg freq array from the last index
-        for(int i=0;i<neg.length;i++){
-            if(k==0) return -i;
-            int minus=Math.min(k,neg[i]);
-            k-=minus;
-            if(k==0) return -i;
+        while(left<=right){
+            int randomIndexAsPivot=rand.nextInt(right-left+1)+left;
+            
+            int findPartitionIndex=partition(arr,left,right,randomIndexAsPivot);
+            if(findPartitionIndex==n-k) return arr[n-k];
+            else if(findPartitionIndex>n-k) right=findPartitionIndex-1;
+            else left=findPartitionIndex+1;
         }
         
         return -1;
+    }
+    
+    public int partition(int arr[],int left,int right,int pivotIndex){
+        int pivotValue=arr[pivotIndex];
+        swap(arr,right,pivotIndex);
+        int i=left;
+        
+        for(int j=left;j<right;j++){
+            if(arr[j]<=pivotValue){
+                swap(arr,i,j);
+                i++;
+            }
+        }
+        
+        swap(arr,right,i);
+        
+        return i;
+    }
+    
+    public void swap(int arr[],int left,int right){
+        int temp=arr[left];
+        arr[left]=arr[right];
+        arr[right]=temp;
     }
 }
