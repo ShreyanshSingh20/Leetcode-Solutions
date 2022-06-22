@@ -1,35 +1,53 @@
 class Solution {
     public String longestPalindrome(String s) {
-        StringBuilder temp=new StringBuilder();
-        char ct[]=s.toCharArray();
-        int n=ct.length;
-        if(n==0) return "";
-        for(int i=0;i<n;i++){
-            temp.append(ct[i]);
-            temp.append('*');
+        StringBuilder sb=new StringBuilder();
+        sb.append('#');sb.append('.');
+        for(int i=0;i<s.length();i++){
+            sb.append(s.charAt(i));
+            sb.append('.');
         }
-        int start=-1;int end=-1;int maxLen=Integer.MIN_VALUE;
-        String newstr=temp.toString();
-        char c[]=newstr.toCharArray();
-        n=c.length;
-        for(int i=0;i<n;i++){
-            int l=i;int r=i;
-            while(l>=0&&r<n&&c[l]==c[r]){
-                l--;r++;
+        sb.append('@');
+        
+        char c[]=sb.toString().toCharArray();
+        int n=c.length;
+        
+        int lps[]=new int[n];
+        
+        int rightMost=0;int center=0;
+        for(int i=1;i<n-1;i++){
+            int mirror=center-(i-center);
+            if(i<rightMost){
+                lps[i]=Math.min(lps[mirror],rightMost-i);
             }
-            l++;r--;
-            int currLen=r-l+1;
-            if(currLen>maxLen){
-                start=l;end=r;
-                maxLen=currLen;
+            
+            while(i+lps[i]+1<n&&i-lps[i]-1>=0&&
+                  c[i+lps[i]+1]==c[i-lps[i]-1]){
+                lps[i]++;
+            }
+            
+            if(i+lps[i]>rightMost){
+                center=i;
+                rightMost=i+lps[i];
             }
         }
         
-        String res=newstr.substring(start,end+1);
-        StringBuilder ans=new StringBuilder();
-        for(int i=0;i<res.length();i++){
-            if(res.charAt(i)!='*') ans.append(res.charAt(i));
+        int max=1;int ind=-1;
+        for(int i=0;i<n;i++){
+           if(lps[i]>=max){
+               max=lps[i];
+               ind=i;
+           }
         }
-        return ans.toString();
+        
+        int start=ind-max;
+        int end=ind+max+1;
+        String res=sb.toString().substring(start,end);
+        StringBuilder finsb=new StringBuilder();
+        for(int i=0;i<res.length();i++){
+            if(res.charAt(i)=='#'||res.charAt(i)=='.'||res.charAt(i)=='@') continue;
+            finsb.append(res.charAt(i));
+        }
+        
+        return finsb.toString();
     }
 }
