@@ -3,34 +3,19 @@ class Solution {
         
         int n = arr.length;
 
-		int prefSum[] = new int[n];
-		int suffSum[] = new int[n];
-
-		prefSum[0] = arr[0];
-		for (int i = 1; i < n; i++)
-			prefSum[i] = prefSum[i - 1] + arr[i];
-
-		suffSum[n - 1] = arr[n - 1];
-		for (int i = n - 2; i >= 0; i--)
-			suffSum[i] = suffSum[i + 1] + arr[i];
-
-		int res = 0;
-
-		for (int num = 0; num <= k; num++) {
-			
-			// taking num number of cards from prefix
-			// taking k-num number of cards from suffix
-
-			int indexPrefix = (num == 0) ? -1 : num - 1;
-			int indexSuffix = (k - num == 0) ? -1 : n - (k - num);
-
-			int prefValue = (indexPrefix == -1) ? 0 : prefSum[indexPrefix];
-			int suffValue = (indexSuffix == -1) ? 0 : suffSum[indexSuffix];
-
-			res = Math.max(res, prefValue + suffValue);
-		}
-        
-        return res;
+		int l=0;int min=Integer.MAX_VALUE;
+        int sum=0;int totalSum=0;
+        for(int r=0;r<n;r++){
+            totalSum+=arr[r];
+            sum+=arr[r];
+            if(r-l+1==n-k){
+                min=Math.min(min,sum);
+                sum-=arr[l];
+                l++;
+            }
+        }
+        if(n-k==0) return totalSum;
+        return totalSum-min;
     }
 }
 //   0   1   2   3  4  5  6
