@@ -11,13 +11,13 @@ class Solution {
         }
         
         while(pq.element()>1){
-            int sum=pq.poll();
-            int sumOfRest=currSum-sum;
+            int largest=pq.poll();
+            int sumOfRest=currSum-largest;
             if(sumOfRest==1) return true;
-            int x=sum%(sumOfRest);
-            if(x==0||x==sum) return false;
+            int x=largest%(sumOfRest);
+            if(x==0||x==largest) return false;
             pq.add(x);
-            currSum=currSum-sum+x;
+            currSum=currSum-largest+x;
         }
         
         return true;
