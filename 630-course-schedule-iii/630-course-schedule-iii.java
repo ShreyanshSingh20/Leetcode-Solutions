@@ -12,10 +12,13 @@ class Solution {
         for(int i=0;i<n;i++){
             int duration=courses[i][0];
             int lastDay=courses[i][1];
+            //if i can take the current course then take it
             if(time+duration<=lastDay){
                 time+=duration;
                 pq.add(new int[]{duration,lastDay});
-            }else{
+            }
+            //I can't take the current course so remove some already taken course to accomodate more courses
+            else{
                 if(pq.isEmpty()) continue;
                 int top[]=pq.peek();
                 if(top[0]<duration) continue;
