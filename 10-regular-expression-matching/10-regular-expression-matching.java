@@ -1,32 +1,27 @@
 class Solution {
-     public boolean isMatch(String s, String p) {
-        return isMatch(s.toCharArray(), p.toCharArray(), 0, 0, new Boolean[s.length() + 1][p.length() + 1]);
+    public boolean isMatch(String s, String p) {
+        Boolean dp[][]=new Boolean[s.length()+2][p.length()+2];
+        return solver(s,p,0,0,dp);
     }
     
-    private boolean isMatch(char a[], char b[], int i, int j, Boolean[][] dp){
-        if(i >= a.length && j >= b.length){
-            return true;
-        }
-       
-        if(j >= b.length){
-            return false;
-        }
+    public boolean solver(String s,String p,int i,int j,Boolean dp[][]){
         
-        if(dp[i][j] != null){
-            return dp[i][j];
-        }
+        if(i>=s.length()&&j>=p.length()) return true;
         
-       
-        boolean matchCondition = i < a.length && (a[i] == b[j] || b[j] == '.');
+        if(j>=p.length()) return false;
         
-        if(j + 1 <b.length && b[j+1] == '*'){
-            dp[i][j] = isMatch(a, b, i, j + 2, dp) ||                        
-                       matchCondition && isMatch(a, b, i + 1, j, dp); 
-        } else {
-            if(matchCondition){
-                dp[i][j] = isMatch(a, b, i + 1, j + 1, dp);                  
-            } else {
-                dp[i][j] = false;
+        if(dp[i][j]!=null) return dp[i][j];
+        
+        boolean matching=i<s.length()&&(s.charAt(i)==p.charAt(j)||p.charAt(j)=='.');
+        
+        if(j+1<p.length()&&p.charAt(j+1)=='*'){
+            dp[i][j]=solver(s,p,i,j+2,dp)||
+                        matching&&solver(s,p,i+1,j,dp);
+        }else{
+            if(matching){
+                dp[i][j]=solver(s,p,i+1,j+1,dp);
+            }else{
+                dp[i][j]=false;
             }
         }
         
