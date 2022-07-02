@@ -31,7 +31,7 @@ class Solution {
         }
         maxVer=Math.max(maxVer,w-verticalCuts[lenVer-1]);
         
-        System.out.println(maxHoz+" "+maxVer);
+        // System.out.println(maxHoz+" "+maxVer);
         
         return (int)mul(maxHoz,maxVer);
     }
