@@ -3,38 +3,46 @@ class Solution {
         
         int n=pid.size();
         
-        List<List<Integer>> g=new ArrayList<>();
-        for(int i=0;i<=50005;i++) g.add(new ArrayList<Integer>());
+        HashMap<Integer,List<Integer>> g=new HashMap<>();
         
-        int indeg[]=new int[50005];
+        HashMap<Integer,Integer> indeg=new HashMap<>();
         
         for(int i=0;i<n;i++){
             int u=ppid.get(i);
             int v=pid.get(i);
             if(u==0) continue;
-            indeg[v]++;
+            indeg.put(v,indeg.getOrDefault(v,0)+1);
             addEdge(g,u,v);
         }
         
         Queue<Integer> queue=new ArrayDeque<>();
         List<Integer> res=new ArrayList<>();
         queue.add(kill);
-        indeg[kill]--;
+        if(indeg.containsKey(kill)){
+            int freq=indeg.get(kill);
+            if(freq==1) indeg.remove(kill);
+            else indeg.put(kill,freq-1);
+        }
         
         while(!queue.isEmpty()){
             int curr=queue.poll();
             res.add(curr);
-            for(int x:g.get(curr)){
-                // System.out.println(x);
-                indeg[x]--;
-                if(indeg[x]==0) queue.add(x);
+            if(!g.containsKey(curr)) continue;
+            for(Integer x:g.get(curr)){
+                if(indeg.containsKey(x)){
+                    int freq=indeg.get(x);
+                    if(freq==1) indeg.remove(x);
+                    else indeg.put(x,freq-1);
+                }
+                if(!indeg.containsKey(x)) queue.add(x);
             }
         }
         
         return res;
     }
     
-    public void addEdge(List<List<Integer>> g,int u,int v){
+    public void addEdge(HashMap<Integer,List<Integer>> g,int u,int v){
+        g.putIfAbsent(u,new ArrayList<Integer>());
         g.get(u).add(v);
     }
 }
