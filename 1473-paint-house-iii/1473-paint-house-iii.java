@@ -1,7 +1,7 @@
 class Solution {
 		public int minCost(int[] houses, int[][] cost, int m, int n, int target) {
 
-			long dp[][][] = new long[105][25][105];
+			long dp[][][] = new long[101][21][101];
 			for (long x[][] : dp) {
 				for (long y[] : x) {
 					Arrays.fill(y, -1);
