@@ -14,6 +14,7 @@ class Solution {
             ops-=freq;
             bucket[i-1]+=freq;
             bucket[i]-=freq;
+            if(ops==0) break;
         }
         
         long res=0;
