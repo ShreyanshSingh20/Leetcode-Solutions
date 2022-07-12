@@ -1,40 +1,41 @@
 class Solution {
     public boolean makesquare(int[] arr) {
-        
+        int k=4;
         int n=arr.length;
-        int limit=(1<<n)-1;
         
-        int sideLen=0;
-        for(int x:arr) sideLen+=x;
+        int totalSum=0;
+        for(int x:arr) totalSum+=x;
+        if(totalSum%k!=0) return false;
+        totalSum/=k;
         
-        List<Integer> usedMasks=new ArrayList<>();
+        HashMap<Integer,Boolean> dp=new HashMap<>();
+        return rec(0,0,0,totalSum,arr,k,-1,dp);
+    }
+    
+    public boolean rec(int currSum,int mask,int countOfSets,int totalSum,int arr[],int k,int prevInd,
+                      HashMap<Integer,Boolean> dp){
         
-        HashMap<Integer,Boolean> map=new HashMap<>();
+        if(countOfSets==k-1) return true;
         
-        if(sideLen%4!=0) return false;
-        sideLen=sideLen/4;
+        if(currSum>totalSum) return false;
         
-        for(int i=0;i<=limit;i++){
-            int mask=i;
-            int subsetSum=0;
-            for(int bit=0;bit<n;bit++){
-                if((mask&(1<<bit))!=0) subsetSum+=arr[bit];
-            }
-            
-            if(subsetSum==sideLen){
-                for(int j=0;j<usedMasks.size();j++){
-                    int usedMask=usedMasks.get(j);
-                    if((usedMask&mask)==0){
-                        int halfMask=usedMask|mask;
-                        map.putIfAbsent(halfMask,true);
-                        int xor=limit^halfMask;
-                        if(map.containsKey(xor)&&map.get(xor)==true) return true;
-                    }
-                }
-                usedMasks.add(mask);
+        if(dp.containsKey(mask)) return dp.get(mask);
+        
+        if(currSum==totalSum){
+            boolean ans=rec(0,mask,countOfSets+1,totalSum,arr,k,-1,dp);
+            dp.put(mask,ans);
+            return ans;
+        }
+        
+        for(int i=prevInd+1;i<arr.length;i++){
+            if((mask&(1<<i))==0){
+                boolean ans=rec(currSum+arr[i],mask|(1<<i),countOfSets,totalSum,arr,k,0,dp);
+                dp.put(mask,ans);
+                if(ans==true) return true;
             }
         }
         
+        dp.put(mask,false);
         return false;
     }
 }
