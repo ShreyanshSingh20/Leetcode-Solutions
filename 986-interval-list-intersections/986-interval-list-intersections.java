@@ -15,9 +15,9 @@ class Solution {
                 int left=Math.max(start1,start2);
                 int right=Math.min(end1,end2);
                 res.add(new int[]{left,right});
-                if(end1>=end2) j++;
-                else if(end1<end2) i++;
-            }else if(end1>=end2) j++;
+            }
+            
+            if(end1>=end2) j++;
             else i++;
             
         }
