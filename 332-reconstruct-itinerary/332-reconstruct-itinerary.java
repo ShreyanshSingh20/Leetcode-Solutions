@@ -14,14 +14,6 @@ class Solution {
         List<String> list=new ArrayList<>();
         dfs(map,list,"JFK");
         
-//         Collections.reverse(list);
-//         List<String> res=new ArrayList<>();
-        
-//         res.add(list.get(0));
-        
-//         for(int i=1;i<list.size();i+=2){
-//             res.add(list.get(i));
-//         }
         Collections.reverse(list);
         return list;
     }
