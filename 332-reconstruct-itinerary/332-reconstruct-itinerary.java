@@ -14,15 +14,16 @@ class Solution {
         List<String> list=new ArrayList<>();
         dfs(map,list,"JFK");
         
+//         Collections.reverse(list);
+//         List<String> res=new ArrayList<>();
+        
+//         res.add(list.get(0));
+        
+//         for(int i=1;i<list.size();i+=2){
+//             res.add(list.get(i));
+//         }
         Collections.reverse(list);
-        List<String> res=new ArrayList<>();
-        
-        res.add(list.get(0));
-        
-        for(int i=1;i<list.size();i+=2){
-            res.add(list.get(i));
-        }
-        return res;
+        return list;
     }
     
     public void dfs(HashMap<String,PriorityQueue<String>> map,List<String> res,String node){
@@ -31,9 +32,8 @@ class Solution {
             while(!pq.isEmpty()){
                 String curr=pq.poll();
                 dfs(map,res,curr);
-                res.add(curr);
-                res.add(node);
             }
         }
+        res.add(node);
     }
 }
