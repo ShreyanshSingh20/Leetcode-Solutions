@@ -48,6 +48,7 @@ class Solution {
 			for (int i = 0; i < list.size(); i++) {
 				for (int j = i + 1; j < list.size(); j++) {
 					for (int k = j + 1; k < list.size(); k++) {
+                        if(i==j||j==k||k==i) continue;
 						List<String> perm = new ArrayList<>();
 						perm.add(list.get(i).website);
 						perm.add(list.get(j).website);
