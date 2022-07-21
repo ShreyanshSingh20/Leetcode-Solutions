@@ -7,7 +7,7 @@ class Solution {
             int dp[][]=new int[i+1][(1<<10)-1];
             for(int x[]:dp) Arrays.fill(x,-1);
             int sub=solver(0,i,0,dp);
-            System.out.println(i+" "+sub);
+            // System.out.println(i+" "+sub);
             uniqueDigits+=sub;
         }
         
@@ -19,7 +19,7 @@ class Solution {
         }
         int curr=solver2(str,0,len,0,1,dp2);
         uniqueDigits+=curr;
-        System.out.println(len+" "+curr);
+        // System.out.println(len+" "+curr);
         return n-uniqueDigits;
         
     }
