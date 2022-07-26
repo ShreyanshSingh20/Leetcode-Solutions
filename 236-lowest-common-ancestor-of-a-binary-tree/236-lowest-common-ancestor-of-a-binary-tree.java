@@ -14,9 +14,7 @@ class Solution {
     
     public TreeNode lca(TreeNode root,int p,int q){
         if(root==null) return null;
-        if(root.val==p||root.val==q){
-            return root;
-        }
+        if(root.val==p||root.val==q) return root;
         
         TreeNode left=lca(root.left,p,q);
         TreeNode right=lca(root.right,p,q);
