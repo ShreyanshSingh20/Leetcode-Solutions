@@ -72,8 +72,8 @@ class State{
         return (this.row==state.row)&&(this.col==state.col)&&(this.k==state.k);
     }
     
-    @Override
-    public String toString(){
-        return String.format("%d %d %d",this.row,this.col,this.k);
-    }
+    // @Override
+    // public String toString(){
+    //     return String.format("%d %d %d",this.row,this.col,this.k);
+    // }
 }
