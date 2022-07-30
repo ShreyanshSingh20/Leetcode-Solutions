@@ -16,9 +16,8 @@ class Solution {
                     dp[t]=Math.min(dp[t],dp[start]+1);
                 }
             }
-            if(dp[t]>=time+1) return -1;
         }
         
-        return dp[time];
+        return dp[time]==Integer.MAX_VALUE/4?-1:dp[time];
     }
 }
