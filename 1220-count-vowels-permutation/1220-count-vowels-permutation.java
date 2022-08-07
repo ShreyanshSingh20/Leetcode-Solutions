@@ -1,18 +1,24 @@
 class Solution {
     public long mod=1_000_000_007;
     public int countVowelPermutation(int n) {
-        long dp[][]=new long[n+1][6];
-        for(long x[]:dp) Arrays.fill(x,-1);
+        Long dp[][]=new Long[n+1][6];
         return (int)solver(0,n,5,dp);
     }
     
+    
+// a->e
+//     e->a,i
+//     i->a,e,o,u
+//     o->i,u
+//     u->a
+    
     public char c[]={'a','e','i','o','u'};
     
-    public long solver(int i,int n,int prev,long dp[][]){
+    public long solver(int i,int n,int prev,Long dp[][]){
         
         if(i==n) return 1;
         
-        if(dp[i][prev]!=-1) return dp[i][prev];
+        if(dp[i][prev]!=null) return dp[i][prev];
         
         long res=0;
         for(int j=0;j<5;j++){
