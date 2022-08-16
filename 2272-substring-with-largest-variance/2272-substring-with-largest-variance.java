@@ -1,3 +1,5 @@
+/*https://leetcode.com/problems/substring-with-largest-variance/discuss/2038774/C++-O(1)-space-complexity-Kadane's-for-each-pair-of-characters
+*/
 class Solution {
     public int largestVariance(String s) {
         char c[]=s.toCharArray();
@@ -6,7 +8,7 @@ class Solution {
         
         for(char highFreq='a';highFreq<='z';highFreq++){
             for(char lowFreq='a';lowFreq<='z';lowFreq++){
-                if(highFreq==lowFreq) continue;
+                // if(highFreq==lowFreq) continue;
                 
                 int hf=0;int lf=0;int ans=0;boolean abandoned=false;
                 for(char ch:c){
