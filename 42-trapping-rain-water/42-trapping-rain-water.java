@@ -3,12 +3,10 @@ class Solution {
         
         int n=arr.length;
         
-        int lmax[]=new int[n];
+        //O(N)~O(N)
+        int lmax=Integer.MIN_VALUE;
         int rmax[]=new int[n];
         
-        for(int i=1;i<n;i++){
-            lmax[i]=Math.max(lmax[i-1],arr[i-1]);
-        }
         
         for(int i=n-2;i>=0;i--){
             rmax[i]=Math.max(rmax[i+1],arr[i+1]);
@@ -20,8 +18,10 @@ class Solution {
         
         int totalWater=0;
         
-        for(int i=0;i<n;i++){
-            int min=Math.min(lmax[i],rmax[i]);
+        //O(3*N)~O(N)
+        for(int i=1;i<n;i++){
+            lmax=Math.max(lmax,arr[i-1]);
+            int min=Math.min(lmax,rmax[i]);
             if(min<arr[i]) continue;
             totalWater+=(min-arr[i]);
         }
