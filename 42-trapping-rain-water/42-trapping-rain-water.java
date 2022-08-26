@@ -3,23 +3,36 @@ class Solution {
         
         int n=arr.length;
         
-        int leftMax[]=new int[n];
-        int rightMax[]=new int[n];
-        leftMax[0]=-1;rightMax[n-1]=-1;
+        int lmax[]=new int[n];
+        int rmax[]=new int[n];
+        
         for(int i=1;i<n;i++){
-            leftMax[i]=Math.max(leftMax[i-1],arr[i-1]);
+            lmax[i]=Math.max(lmax[i-1],arr[i-1]);
         }
         
         for(int i=n-2;i>=0;i--){
-            rightMax[i]=Math.max(rightMax[i+1],arr[i+1]);
+            rmax[i]=Math.max(rmax[i+1],arr[i+1]);
         }
         
-        int res=0;
+        // for(int x:lmax) System.out.print(x+" ");
+        // System.out.println();
+        // for(int x:rmax) System.out.print(x+" ");
+        
+        int totalWater=0;
+        
         for(int i=0;i<n;i++){
-            int add=Math.min(leftMax[i],rightMax[i])-arr[i];
-            if(add<0) continue;
-            res+=add;
+            int min=Math.min(lmax[i],rmax[i]);
+            if(min<arr[i]) continue;
+            totalWater+=(min-arr[i]);
         }
-        return res;
+        
+        return totalWater;
+        
     }
 }
+
+
+//      0 1 0 2 1 0 1 3 2 1 2 1
+// lmax 0 0 1 1 2 2 2 2 3 3 3 3
+// rmax 3 3 3 3 3 3 3 2 2 2 1 0 
+         
