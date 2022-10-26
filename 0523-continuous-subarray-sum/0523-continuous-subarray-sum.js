@@ -22,7 +22,7 @@ var checkSubarraySum = function (nums, k) {
     if (mod === 0 && i + 1 >= 2) return true;
     if (map.has(mod)) {
       const prevInd = map.get(mod);
-      if (i - prevInd >= 2 && (sum - prefSum[prevInd]) % k == 0) return true;
+      if (i - prevInd >= 2 && (sum - prefSum[prevInd]) % k === 0) return true;
     }
     if (!map.has(mod)) {
       map.set(mod, i);
